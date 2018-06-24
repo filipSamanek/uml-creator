@@ -1,0 +1,45 @@
+thead td {
+	font-weight: bold;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+h1 {
+	display: none;
+}
+
+code {
+	white-space: pre;
+}
+
+code.block {
+	display: block;
+}
+
+@media screen {
+	html, body {
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
+	
+	.slide {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+}
+
+@media print {
+	.slide {
+		page-break-after: always;
+	}
+	
+	footer {
+		display: none;
+	}
+}

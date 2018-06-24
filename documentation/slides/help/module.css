@@ -1,0 +1,53 @@
+@media screen {
+	#help {
+		position: absolute;
+		z-index: 999;
+
+		-webkit-transition: all 500ms;
+		-moz-transition: all 500ms;
+		-ms-transition: all 500ms;
+		-o-transition: all 500ms;
+		transition: all 500ms;
+
+		color: white;
+		text-shadow: 0px 1px 1px black;
+		background-color: rgba(100, 100, 100, 0.9);
+		border-radius: 20px;
+		padding: 1em;
+		font-size: 75%;
+	}
+	
+	#help h3 {
+		text-align: center;
+	}
+
+	#help p {
+		text-align: center;
+	}
+	
+	#help a {
+		color: #fff;
+	}
+	
+	#help table {
+		margin: 0 auto;
+	}
+	
+	#help td {
+		padding: 0.3em 1em;
+	}
+	
+	#help td:last-child {
+		text-align: right;
+		font-weight: bold;
+	}
+	
+	#help.hidden {
+		-webkit-transform: scale(0);
+		-moz-transform: scale(0);
+		-ms-transform: scale(0);
+		-o-transform: scale(0);
+		transform: scale(0);
+		border-radius: 50%;
+	}
+}

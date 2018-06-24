@@ -1,0 +1,9 @@
+@media screen {
+	.slide:not(.current) {
+		visibility: hidden;
+	}
+
+	.overview .slide:not(.current) {
+		visibility: visible;
+	}
+}

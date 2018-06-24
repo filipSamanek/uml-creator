@@ -1,0 +1,121 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900|Inconsolata:400,700&subset=latin,latin-ext);
+
+body {
+	font-family: lato, sans-serif;
+}
+
+code, kbd {
+	font-weight: normal;
+	font-family: inconsolata, monospace;
+}
+
+li {
+	padding-top: 0.5rem;
+}
+
+kbd {
+	display: inline-block;
+	margin: 0 0.1em;
+	padding: 0.2em 0.6em;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+code.block {
+	padding: 0.5rem;
+	margin: 0.5rem 0;
+	line-height: 150%;
+	border-top: 3px solid #61301D;
+	border-bottom: 3px solid #61301D;
+	border-radius: 15px;
+}
+
+@media screen {
+	body {
+		background-color: #E9CF92;
+		color: #4F2512;
+		font-weight: 300;
+	}
+
+	a {
+		color: #61301D;
+		font-weight: normal;
+	}
+
+	kbd {
+		color: #333;
+		background-color: #f7f7f7;
+		-webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
+		-moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
+		box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #ffffff inset;
+	}
+
+	h2 {
+		font-weight: 900;
+		color: #E9CF92;
+		margin: 0;
+		padding: 1rem;
+		background-color: #4F2512;
+		position: relative;
+	}
+
+	h2:after {
+		display: block;
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -0.3rem;
+		width: 100%;
+		border-top: 0.3rem solid #904420;
+		border-bottom: 0.3rem solid #CA902C;
+	}
+
+	h2 ~ * {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
+	li.current {
+		font-weight: normal;
+		list-style-type: none;
+		position: relative;
+	}
+
+	li.current::before {
+		content: "☞";
+		font-weight: normal;
+		font-family: freeserif, serif;
+		position: absolute;
+		left: -1em;
+		font-size: 160%;
+		line-height: 62.5%;
+	}
+
+	#progress, #time {
+		position: fixed;
+		background-color: rgba(255, 255, 255, 0.5);
+		height: 6px;
+		-webkit-transition: width 500ms;
+		-moz-transition: width 500ms;
+		transition: width 500ms;
+	}
+
+	#time {
+		bottom: 0;
+		right: 0;
+		background-image: -webkit-linear-gradient(to right, rgba(240, 0, 0, 0.7) 0px, rgba(240, 0, 0, 0.7) 20px, rgba(240, 0, 0, 0) 100px);
+		background-image: linear-gradient(to right, rgba(240, 0, 0, 0.7) 0px, rgba(240, 0, 0, 0.7) 20px, rgba(240, 0, 0, 0) 100px);
+	}
+
+	#progress {
+		bottom: 6px;
+		left: 0;
+		color: transparent;
+		background-image: -webkit-linear-gradient(to left, rgba(0, 0, 240, 0.7) 0px, rgba(0, 0, 240, 0.7) 20px, rgba(0, 0, 240, 0) 100px);
+		background-image: linear-gradient(to left, rgba(0, 0, 240, 0.7) 0px, rgba(0, 0, 240, 0.7) 20px, rgba(0, 0, 240, 0) 100px);
+	}
+
+	#help {
+		font-weight: normal;
+	}
+}

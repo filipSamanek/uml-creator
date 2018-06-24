@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>UML Creator</title>
+	</head>
+	<body>
+		
+<h1>UML Creator</h1>
+
+<section class="slide">
+	<h2>Popis</h2>
+	<h3>Webová aplikace pro vytváření UML diagramů</h3>
+	<p>
+		Uplikace umožňuje drag and drop manipulovat s UML elementy a drag and drop přidávat elementy.
+	</p>
+	<p>
+		UML elementy lze kreslit pomocí myši nebo dotikové obrazovky. Jeden tah se
+		bere jako jeden element (u myši dokud držím stisknuté tlačítko)
+	</p>
+	<p>
+		Aplikace je napsaná v reactu a je objektově orientovaná, díky tomu lze jednoduše přidávat
+		nové elemnty.
+	</p>
+</section>
+<section class="slide">
+	<h2>Ukázka aplikace</h2>
+	<p>
+		Aplikaci si lze vyzkoušet na adrese <a href="nevimkam.html">nejaka adresa</a>
+		a nebo se můžete kouknout na video s její ukázkou
+	</p>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/RpHeTOhYI_4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</section>
+<section class="slide">
+	<h2>Zdrojový kód (1)</h2>
+	<p>
+		Zdrojové kódy naleznete na <a href="https://github.com/filipSamanek/uml-creator">GitHubu</a>
+		po stažení je potřeba nainstalovat závislostin pomocí <br>
+		<code>npm install</code> <br>
+		a pak jí lze spustit pomocí <br>
+		<code>npm start</code>
+	</p>
+</section>
+
+
+
+<section class="slide">
+	<h2>Zdrojový kód (2)</h2>
+	<h3>Struktura projektu</h3>
+	<p>
+		Projekt je rozdělen do několika částí
+	</p>
+	<ul>
+		<li>src/componemts  - vizuální prvky </li>
+		<li>src/Services - například komunikace se serverem</li>
+		<li>src/actions - obalují jednotlivé akce - přesun elementu, přidání element atd..</li>
+		<li>src/elements - obsahuje jednotlivé UML elementy (každý má svoji vlastní složku) a
+			předek všech komponent (baseElement) od kterého dědí a který obsahuej většinu
+			funkcionality ohledně jednotlivých prvků
+		</li>
+		<li>src/reducers - metoda pro práci s reduxem (pridává/upravuje věci v redux storage)</li>
+	</ul>
+</section>
+<section class="slide">
+	<h2>Zdrojový kód (3)</h2>
+	<h3>UML elementy</h3>
+	<p>
+		Každý UML element se skládá ze 2-3 component. Jedna je pro jeho zobrazení,
+		druhá pro jeho náhled při drag and drop přídávání a třetí nepoviná může být pro
+		formuláž s její editací
+	</p>
+	<p>Dále každý UML element má svojí service, která se stará o jeho rozpoznání</p>
+</section>
+<section class="slide">
+	<h2>Zdrojový kód (4)</h2>
+	<h3>UML elementy - Vytváření nového</h3>
+	<p>
+		Potřeba extendovat BaseUmlElement.js a implementovat potřebné metody, extendovat
+		BaseUmlElementPreview.js a implementovat potřebné metody a nakonec implementovat
+		rozpoznávání.
+	</p>
+	<p>Rozpoznávání dostane bo nakresleného obrazce a spočítá vzdálenost na druhou od nejbližšího
+	bodu danného elementu
+	</p>
+	<p>
+		Nový element je potřeba přidat do metod v baseElement/services/ElementService.js
+	</p>
+</section>
+<section class="slide">
+	<h2>Zdrojový kód (5)</h2>
+	<h3>UML css</h3>
+	<p>
+		CSS soubory se nacházejí ve složce src/css kde jsou ty které se přiřazují přímo k elementům
+		a potom je ješte jeden přímo ve root složce.
+	</p>
+	<p>Pokročilejší selectory a transformace/animace jsou použity pro vykreslení loading spineru</p>
+</section>
+<section class="slide">
+	<h2>Zdrojový kód (6)</h2>
+	<h3>Offline/online, historie</h3>
+	<p>
+		Aplikaci může po načtení běžet offline, akorát nelze uložit data (tlačítko save rozpozná,
+		že je uživatel offline a disabluje se.
+	</p>
+	<p>
+		Provedenou akci lze vrátit zpět buď pomocí tlačítka, nebo pomocí prohlížeče a navigace
+		dopředu/zpět
+	</p>
+</section>
+
+<section class="slide">
+	<h2>Možné vylepšení a co se nestihlo</h2>
+	<ul class="sections">
+		<li>Backend a přihlašování</li>
+		<li>Celkově lepší správa vytvořených diagramů a jejich export třeba do PDF (toto je ale primárně věc backendu)</li>
+		<li>Přichytávání šipky na elementy</li>
+		<li>Přidat více elementů</li>
+		<li>Vymyslet lepší algoritmu pro rozpoznávání a využít při rozpoznávání web workers</li>
+		<li>Lepší design (potřeboval bych grafika co mi to vymyslí :-D )</li>
+	</ul>
+</section>
+
+
+<section class="slide">
+	<h2>KONEC</h2>
+	<h3>To je asi vše</h3>
+</section>
+
+	<script src="slides/slides3.js" type="text/javascript"></script>
+	<script>
+		Slides.modules.progress.parent = "body";
+		Slides.modules.fontsize.normal = "200%";
+		Slides.modules.language = ["en", "cs"];
+		Slides.modules.time.parent = "body";
+		Slides.modules.time.remaining = 5 * 60 * 1000;
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+.keyword {
+	color: #33a;
+}
+
+.number {
+	color: #a33;
+}
+
+.string, .string * {
+	color: #555;
+}
+
+.comment, .comment * {
+	color: #282;
+}
+
+.macro, .macro * {
+	color: #41b;
+}
+
+.line-counter {
+	float: left;
+	opacity: 0.5;
+	text-align: right;
+}
+
+.line-counter div::after {
+	content: ". ";
+}
