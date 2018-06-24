@@ -8,6 +8,7 @@ import * as ElementActions from '../actions/ElementActions'
 import ElementService from '../elements/baseElement/services/ElementService'
 import UmlElemntsPreview from "./UmlElemntsPreview";
 import SelectProject from "./SelectProject"
+import WorkWithProject from "./WorkWithProject";
 
 class App extends React.Component {
 
@@ -28,7 +29,7 @@ class App extends React.Component {
     }
 
     handleLoadNewProject = () => {
-        this.setState({selectProject: false})
+        this.setState({selectProject: true})
     }
 
     static mapStateToProps = state => ({
@@ -44,7 +45,7 @@ class App extends React.Component {
             <Grid>
                 <Row>
                     <Col xs={12} md={9}>
-                        {this.state.selectProject?<SelectProject onProjectLoaded={this.handleProjectLoaded}/>:<UmlCanvas onNewProject={this.handleLoadNewProject}/>}
+                        {this.state.selectProject?<SelectProject onProjectLoaded={this.handleProjectLoaded}/>:<UmlCanvas/>}
                     </Col>
                     {this.state.selectProject?"":(
                         <Col xs={12} md={3}>
@@ -57,6 +58,11 @@ class App extends React.Component {
                                 <Col xs={12}>
                                     {this.props.element ?<hr />:""}
                                     {this.props.element ?<EditForm element={this.props.element} onDelete={this.deleteElement} onSave={this.editElement}/>:""}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12}>
+                                    <WorkWithProject onNewProject={this.handleLoadNewProject}/>
                                 </Col>
                             </Row>
                         </Col>

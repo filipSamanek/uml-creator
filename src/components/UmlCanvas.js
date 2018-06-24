@@ -8,12 +8,6 @@ import ElementService from "../elements/baseElement/services/ElementService";
 
 class UmlCanvas extends React.Component {
 
-    static propTypes = {
-        onNewProject: PropTypes.func.isRequired
-    }
-
-
-
     constructor(){
         super()
         this.ref = React.createRef()

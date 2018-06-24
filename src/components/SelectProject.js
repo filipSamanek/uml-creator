@@ -26,16 +26,14 @@ class SelectProject extends React.Component {
         let project = formData.target.text.value
 
         ApiService.getData(project)
-            .then((response) => {
-                response.json().then(data => {
-                    this.props.dispatch(ElementActions.deleteAll())
-                    this.props.dispatch(ElementActions.loadData(data))
-                    this.setState({loading:false});
-                    console.log(data)
-                    this.props.onProjectLoaded(project)
-                });
+            .then((data) => {
 
-            })
+                this.props.dispatch(ElementActions.deleteAll())
+                this.props.dispatch(ElementActions.loadData(data))
+                this.setState({loading:false});
+                console.log(data)
+                this.props.onProjectLoaded(project)
+            });
 
     }
 
