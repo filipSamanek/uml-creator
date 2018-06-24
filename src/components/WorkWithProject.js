@@ -8,7 +8,8 @@ import ModalLoader from "./ModalLoader"
 class WorkWithProject extends React.Component{
 
     state = {
-        loading: false
+        loading: false,
+        online: true
     }
 
     static propTypes = {
@@ -20,10 +21,16 @@ class WorkWithProject extends React.Component{
         elements: state.umlElementsReducer
     })
 
+    componentDidMount = () => {
+        this.setState({online: navigator.onLine})
+        window.addEventListener("online", this.handleOnline)
+        window.addEventListener("offline", this.handleOffline)
+    }
+
     handleSave = () => {
         this.setState({loading:true})
         ApiService.saveData(this.state.elements).then((data)=>{
-            this.setState({loading:true})
+            this.setState({loading:false})
         })
     }
 
@@ -31,12 +38,20 @@ class WorkWithProject extends React.Component{
         this.props.dispatch(ElementActions.deleteAll())
     }
 
+    handleOnline = () => {
+        this.setState({online:true})
+    }
+
+    handleOffline = () => {
+        this.setState({online:false})
+    }
+
     render(){
         return (
             <div>
                 <Row>
                     <Col xs={12}>
-                        <Button disabled={true} onClick={this.handleSave}>Uložit</Button>
+                        <Button disabled={!this.state.online} onClick={this.handleSave}>Uložit</Button>
                         <Button onClick={this.handleDelete}>Smazat vše</Button>
                         <Button onClick={this.props.onNewProject}>Nový projekt</Button>
                     </Col>

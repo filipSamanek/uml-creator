@@ -9,11 +9,31 @@ import ElementService from '../elements/baseElement/services/ElementService'
 import UmlElemntsPreview from "./UmlElemntsPreview";
 import SelectProject from "./SelectProject"
 import WorkWithProject from "./WorkWithProject";
+import UndoRedo from "./UndoRedo"
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 
 class App extends React.Component {
 
     state = {
         selectProject: true,
+    }
+
+    stateId = undefined
+
+    componentDidMount = e => {
+        window.onpopstate = this.onBackButtonEvent;
+    }
+
+    onBackButtonEvent = (e) => {
+        e.preventDefault();
+        if(this.stateId<e.state){
+            this.props.dispatch(UndoActionCreators.redo())
+        }else{
+            this.props.dispatch(UndoActionCreators.undo())
+        }
+        this.stateId = e.state
+        console.log(e.state)
+
     }
 
     editElement = (data, id) => {
@@ -50,7 +70,7 @@ class App extends React.Component {
                     {this.state.selectProject?"":(
                         <Col xs={12} md={3}>
                             <Row>
-                                <Col xs={12}>
+                                <Col className={"bordered"} xs={12}>
                                     <UmlElemntsPreview/>
                                 </Col>
                             </Row>
@@ -62,6 +82,14 @@ class App extends React.Component {
                             </Row>
                             <Row>
                                 <Col xs={12}>
+                                    <hr />
+                                    <UndoRedo onNewProject={this.handleLoadNewProject}/>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col xs={12}>
+                                    <hr />
                                     <WorkWithProject onNewProject={this.handleLoadNewProject}/>
                                 </Col>
                             </Row>

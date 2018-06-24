@@ -47,7 +47,7 @@ class SelectProject extends React.Component {
                             Jméno projektu:
                         </Col>
                         <Col xs={8}>
-                            <FormControl type={"text"} name={"text"}/>
+                            <FormControl type={"text"}  name={"text"}/>
                         </Col>
                     </FormGroup>
                     <Button type="submit">Načíst</Button>

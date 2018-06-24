@@ -24,7 +24,7 @@ class UmlCanvas extends React.Component {
 
 
     static mapStateToProps = state => ({
-        elements: state.umlElementsReducer
+        elements: state.umlElementsReducer.present
     })
 
     componentDidMount = () => {

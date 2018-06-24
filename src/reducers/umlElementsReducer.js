@@ -1,5 +1,8 @@
 import * as actionTypes from '../constants/ElementActionTypes'
 import UuidGenerator from '../Services/UuidGenerator'
+import undoable, { distinctState } from 'redux-undo'
+
+var stateId = 0
 
 const initialState = [
 ]
@@ -15,8 +18,9 @@ const actionToElement = action =>{
 }
 
 
-export default function umlElementsReducer(state = initialState, action) {
+function umlElementsReducer(state = initialState, action) {
 
+    history.pushState(stateId++, null, "#" + UuidGenerator.generate())
     switch (action.type) {
         case actionTypes.ADD_ELEMENT:
             return [
@@ -42,7 +46,7 @@ export default function umlElementsReducer(state = initialState, action) {
                 if(element.id === action.id){
                     element.position = action.position
                 }
-                return element
+                return _.clone(element)
             })
         case actionTypes.EDIt_ELEMENT:
             return state.map(element => {
@@ -50,17 +54,20 @@ export default function umlElementsReducer(state = initialState, action) {
                     element.text = action.text
                     element.type = action.elementType
                 }
-                return element
+                return _.clone(element)
             })
         case actionTypes.SELECT_ELEMENT:
             return state.map(element => {
                 if(element.id === action.id){
                     element.selected = action.selected
                 }
-                return element
+                return _.clone(element)
             })
 
         default:
             return state
     }
 }
+
+const undoableTodos = undoable(umlElementsReducer,  { filter: distinctState()})
+export default undoableTodos
