@@ -1,14 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
-import {Row, Col, Grid} from 'react-bootstrap'
-import UmlCanvas from '../components/UmlCanvas';
-import {getSelectedElement} from "../Selector/umlElementSelector";
-import * as ElementActions from '../actions/ElementActions'
-import ElementService from '../elements/baseElement/services/ElementService'
-import UmlElemntsPreview from "./UmlElemntsPreview";
-
-class App extends React.Component {
+export default class ModalLoader extends React.Component {
 
     render() {
         return (
@@ -20,5 +12,3 @@ class App extends React.Component {
         );
     }
 };
-
-export default connect(App.mapStateToProps)(App);

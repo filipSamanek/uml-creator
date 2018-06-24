@@ -2,6 +2,7 @@ import * as types from '../constants/ElementActionTypes'
 import UuidGenerator from "../Services/UuidGenerator";
 
 export const deleteElement =  (id) => ({type: types.DELETE_ELEMENT, id: id})
+export const deleteAll = () => ({type: types.DELETE_ALL_ELEMENTS})
 export const updatePosition = (position, id) => ({type: types.EDIT_ELEMENT_POSITION, id: id, position: position})
 export const selectElement =  (selected, id) => ({type: types.SELECT_ELEMENT, id: id, selected:selected})
 export const editElement = (data, id) => ({type: types.EDIt_ELEMENT, id: id, text: data.text, elementType: data.type})
@@ -21,3 +22,4 @@ export const createElement = (position, type) => {
         selected: false
     }
 }
+export const loadData = (data) => ({type: types.ADD_MULTIPLE_ELEMENTS, data:data})

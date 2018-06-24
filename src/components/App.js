@@ -7,13 +7,12 @@ import {getSelectedElement} from "../Selector/umlElementSelector";
 import * as ElementActions from '../actions/ElementActions'
 import ElementService from '../elements/baseElement/services/ElementService'
 import UmlElemntsPreview from "./UmlElemntsPreview";
-import ModalLoader from "./ModalLoader"
+import SelectProject from "./SelectProject"
 
 class App extends React.Component {
 
     state = {
         selectProject: true,
-        loading: false
     }
 
     editElement = (data, id) => {
@@ -22,6 +21,14 @@ class App extends React.Component {
 
     deleteElement = (id) => {
         this.props.dispatch(ElementActions.deleteElement(id))
+    }
+
+    handleProjectLoaded = (projectName) => {
+        this.setState({selectProject:false})
+    }
+
+    handleLoadNewProject = () => {
+        this.setState({selectProject: false})
     }
 
     static mapStateToProps = state => ({
@@ -37,7 +44,7 @@ class App extends React.Component {
             <Grid>
                 <Row>
                     <Col xs={12} md={9}>
-                        {this.state.selectProject?"":<UmlCanvas />}
+                        {this.state.selectProject?<SelectProject onProjectLoaded={this.handleProjectLoaded}/>:<UmlCanvas onNewProject={this.handleLoadNewProject}/>}
                     </Col>
                     {this.state.selectProject?"":(
                         <Col xs={12} md={3}>
@@ -55,7 +62,7 @@ class App extends React.Component {
                         </Col>
                     )}
                 </Row>
-                {this.state.loading?<ModalLoader/>:""}
+
             </Grid>
 
         );

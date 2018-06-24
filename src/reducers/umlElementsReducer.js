@@ -24,6 +24,14 @@ export default function umlElementsReducer(state = initialState, action) {
                 actionToElement(action)
             ]
 
+        case actionTypes.ADD_MULTIPLE_ELEMENTS:
+            return _.map(action.data, (element) => {
+                return actionToElement(element)
+            })
+
+        case actionTypes.DELETE_ALL_ELEMENTS:
+            return []
+
         case actionTypes.DELETE_ELEMENT:
             return state.filter(todo =>
                 todo.id !== action.id
