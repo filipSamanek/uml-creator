@@ -14,7 +14,7 @@ export default class UmlElemntsPreview extends  React.Component{
                 <strong>Elementy lze přetáhnout myší na pracovní plochu</strong>
                 <Row>
                     {_.map(ElementService.getElementsPreviewComponent(), Element =>
-                        <Col sm={3} key={UuidGenerator.generate()}>
+                        <Col xs={3} key={UuidGenerator.generate()}>
 
                             <Element width={50} height={50}/>
                         </Col>

@@ -63,6 +63,8 @@ class UmlCanvas extends React.Component {
 
         this.refCanvasSvg.current.appendChild(path);
         this.drawingElement = path;
+        this.refCanvasSvg.current.addEventListener('mousemove', this.handleMouseMove, {passive:false})
+        this.refCanvasSvg.current.addEventListener('touchmove', this.handleMouseMove, {passive: false})
     }
 
     handleMouseMove = (e) =>{
@@ -77,17 +79,21 @@ class UmlCanvas extends React.Component {
         let d = this.drawingElement.getAttributeNS(null, 'd') || `M ${x} ${y}`;
         d += ` L ${x} ${y}`;
         this.drawingElement.setAttributeNS(null, 'd', d);
+
+        e.preventDefault()
     }
+
 
     handleMouseUp = (e) => {
         if(!this.drawing){
             return false
         }
         try {
-            let element = ElementService.getElementTypeFromPath(this.elementPoints)
-            if(element.type) {
+            if(this.elementPoints.length>0){
+                let element = ElementService.getElementTypeFromPath(this.elementPoints)
                 this.props.dispatch(ElementActions.createElement(element.position, element.type))
             }
+
         }catch (e) {
             console.log(e)
         }
@@ -95,6 +101,8 @@ class UmlCanvas extends React.Component {
 
 
         this.drawing = false
+        this.refCanvasSvg.current.removeEventListener('mousemove', this.handleMouseMove)
+        this.refCanvasSvg.current.removeEventListener('touchmove', this.handleMouseMove)
     }
 
 
@@ -129,14 +137,17 @@ class UmlCanvas extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col xsOffset={10} xs={2}>
-                        <Label>Drawing mode </Label>
+                    <Col xs={8}>
+                        <h1 className={styles.title}>UML diagram creaetor 1.0</h1>
+                    </Col>
+                    <Col xs={4}>
                         <ButtonToolbar className={"pull-right"}>
                             <ToggleButtonGroup onChange={(e)=>{this.canDraw=e}} type="radio" name="drawingSwitch" defaultValue={false}>
                                 <ToggleButton value={false}>OFF</ToggleButton>
                                 <ToggleButton value={true}>On</ToggleButton>
                             </ToggleButtonGroup>
                         </ButtonToolbar>
+                        <Label className={"pull-right"}>Kreslící mód</Label>
                     </Col>
                 </Row>
                 <div ref={this.ref} className={styles.canvas}
@@ -146,10 +157,8 @@ class UmlCanvas extends React.Component {
                     <svg ref={this.refCanvasSvg} width={"100%"} height={"100%"}
                          onMouseDown={this.handleMouseDown}
                          onMouseUp={this.handleMouseUp}
-                         onMouseMove={this.handleMouseMove}
                          onTouchStart={this.handleMouseDown}
                          onTouchEnd={this.handleMouseUp}
-                         onTouchMove={this.handleMouseMove}
                     >
 
                         {_.map(this.props.elements, element =>

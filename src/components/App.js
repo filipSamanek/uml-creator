@@ -7,8 +7,14 @@ import {getSelectedElement} from "../Selector/umlElementSelector";
 import * as ElementActions from '../actions/ElementActions'
 import ElementService from '../elements/baseElement/services/ElementService'
 import UmlElemntsPreview from "./UmlElemntsPreview";
+import ModalLoader from "./ModalLoader"
 
 class App extends React.Component {
+
+    state = {
+        selectProject: true,
+        loading: false
+    }
 
     editElement = (data, id) => {
         this.props.dispatch(ElementActions.editElement(data, id))
@@ -30,23 +36,26 @@ class App extends React.Component {
         return (
             <Grid>
                 <Row>
-                    <Col xs={12} md={8}>
-                        <UmlCanvas />
+                    <Col xs={12} md={9}>
+                        {this.state.selectProject?"":<UmlCanvas />}
                     </Col>
-                    <Col xs={12} md={4}>
-                        <Row>
-                            <Col xs={12}>
-                                <UmlElemntsPreview/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                {this.props.element ?<hr />:""}
-                                {this.props.element ?<EditForm element={this.props.element} onDelete={this.deleteElement} onSave={this.editElement}/>:""}
-                            </Col>
-                        </Row>
-                    </Col>
+                    {this.state.selectProject?"":(
+                        <Col xs={12} md={3}>
+                            <Row>
+                                <Col xs={12}>
+                                    <UmlElemntsPreview/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col xs={12}>
+                                    {this.props.element ?<hr />:""}
+                                    {this.props.element ?<EditForm element={this.props.element} onDelete={this.deleteElement} onSave={this.editElement}/>:""}
+                                </Col>
+                            </Row>
+                        </Col>
+                    )}
                 </Row>
+                {this.state.loading?<ModalLoader/>:""}
             </Grid>
 
         );

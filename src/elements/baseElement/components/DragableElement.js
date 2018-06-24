@@ -53,6 +53,7 @@ export default class DragableElement extends React.Component {
         this.mouseCoords = mouseCoord
 
         this.hadleDraging(coordDif)
+        e.preventDefault()
 
     }
 

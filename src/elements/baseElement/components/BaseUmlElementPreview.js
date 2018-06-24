@@ -11,6 +11,10 @@ export default class BaseUmlElementPreview extends React.Component{
         e.dataTransfer.setData("umlElementType", this.getType());
     }
 
+    componentDidUpdate = () => {
+        this.centerText()
+    }
+
 
 
 
