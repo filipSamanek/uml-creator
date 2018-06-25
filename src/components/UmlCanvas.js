@@ -29,8 +29,15 @@ class UmlCanvas extends React.Component {
 
     componentDidMount = () => {
         let pos = this.ref.current.getBoundingClientRect()
-        this.posX = pos.x
-        this.posY = pos.y
+        if(pos.x && pos.y){
+            this.posX = pos.x
+            this.posY = pos.y
+        }else{
+            this.posX = pos.left
+            this.posY = pos.top
+        }
+        console.log(pos)
+
     }
 
 
@@ -122,6 +129,9 @@ class UmlCanvas extends React.Component {
             x: e.clientX-this.posX,
             y: e.clientY-this.posY
         }
+        console.log(e.clientX)
+        console.log(e)
+        console.log(pos)
         this.props.dispatch(ElementActions.createElement(pos, umlElementName))
     }
 
